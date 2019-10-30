@@ -1,3 +1,4 @@
+import javafx.scene.effect.Blend;
 import sun.awt.event.IgnorePaintEvent;
 
 import java.util.Arrays;
@@ -9,6 +10,10 @@ public class Main {
         //System.out.println(differenceBetweenMinAndMaxElementsInArray(makeArrayWithRandomElements(6)));
         //System.out.println(comparisonElementsTwoArrays(makeArrayWithRandomElements(2), makeArrayWithRandomElements(3)));
         //System.out.println(searchMissedNumberFromZeroToNineInArray(new int[]{1, 0, 4, 9, 6, 5, 3, 8, 7}));
+        //System.out.println(maxElementInTwoDimensionalArray(generateTwoDimensionalArray(3, 3)));
+        //printTwoDimensionalArray(swapMinAndMaxElementsInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
+        //printTwoDimensionalArray(replaceOddOnEvenElementInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
+        multiplyDiagonalElementsRelativeEnteredElement(generateTwoDimensionalArray(3, 3), 0, 0);
 
     }
 
@@ -182,6 +187,78 @@ public class Main {
         }
         return array;
     }
+
+    public static int minElementInTwoDimensionalArray (int[][] givenArray) {
+        int minElement = givenArray[0][0];
+        for (int i = 0; i < givenArray.length; i++) {
+            for (int j = 0; j < givenArray[i].length; j++) {
+                if (givenArray[i][j] < minElement) {
+                    minElement = givenArray[i][j];
+                }
+            }
+        }
+        return minElement;
+    }
+
+    public static int maxElementInTwoDimensionalArray (int[][] givenArray) {
+        int maxElement = givenArray[0][0];
+        for (int i = 0; i < givenArray.length; i++) {
+            for (int j = 0; j < givenArray[i].length; j++) {
+                if (givenArray[i][j] > maxElement) {
+                    maxElement = givenArray[i][j];
+                }
+            }
+        }
+        return maxElement;
+    }
+
+    public static int[][] swapMinAndMaxElementsInTwoDimensionalArray (int[][] givenArray) {
+        int minElement = minElementInTwoDimensionalArray(givenArray);
+        int maxElement = maxElementInTwoDimensionalArray(givenArray);
+        for (int i = 0; i < givenArray.length; i++) {
+            for (int j = 0; j < givenArray[i].length; j++) {
+                if (givenArray[i][j] == minElement) {
+                    givenArray[i][j] = maxElement;
+                }
+                else if (givenArray[i][j] == maxElement) {
+                    givenArray[i][j] = minElement;
+                }
+            }
+        }
+        return givenArray;
+    }
+
+    public static int[][] replaceOddOnEvenElementInTwoDimensionalArray (int[][] givenArray) {
+        System.out.println();
+        for (int i = 0; i < givenArray.length; i++) {
+            for (int j = 0; j < givenArray[i].length; j++) {
+                if (j % 2 != 0) {
+                    givenArray[i][j] = givenArray[i][j-1];
+                }
+                else if (j == 0) {
+                    givenArray[i][j] = 0;
+                }
+            }
+        }
+        return givenArray;
+    }
+
+    public static int multiplyDiagonalElementsRelativeEnteredElement (int[][] givenArray, int indexOfLine, int indexOfElementInLine) {
+        int multiply = 0;
+        printTwoDimensionalArray(givenArray);
+        if (indexOfLine < givenArray.length - 1 && indexOfElementInLine < givenArray[indexOfLine].length - 1 && indexOfLine != 0 && indexOfElementInLine != 0) {
+            multiply = givenArray[indexOfLine-1][indexOfElementInLine-1] * givenArray[indexOfLine-1][indexOfElementInLine+1] * givenArray[indexOfLine+1][indexOfElementInLine-1] * givenArray[indexOfLine+1][indexOfElementInLine+1];
+        }
+        else if (indexOfLine == 0 && indexOfElementInLine == 0) {
+            multiply = givenArray[indexOfLine+1][indexOfElementInLine+1];
+        }
+
+        System.out.println(multiply);
+        return multiply;
+
+    }
+
+
 
 
 }
