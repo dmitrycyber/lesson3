@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
@@ -9,16 +10,23 @@ public class Main {
         //Задача4
         //System.out.println(comparisonElementsTwoArrays(makeArrayWithRandomElements(2), makeArrayWithRandomElements(3)));
         //Задача5
-        //System.out.println(searchMissedNumberFromZeroToNineInArray(new int[]{1, 0, 4, 9, 6, 5, 3, 8, 7}));
+        //System.out.println(searchMissedNumberFromZeroToNineInArray(new int[]{1, 0, 4, 9, 6, 5, 3, 8, 7, 2}));
         //Задача6
+        //System.out.println(findMinElement(generateTwoDimensionalArray(5, 6)));
         //Задача7
         //printTwoDimensionalArray(swapMinAndMaxElementsInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
+        //swapMinAndMaxElementsInTwoDimensionalArray2(generateTwoDimensionalArray(4, 4));
         //Задача8
         //printTwoDimensionalArray(replaceOddOnEvenElementInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
         //Задача9
-        //multiplyDiagonalElementsRelativeEnteredElement(generateTwoDimensionalArray(3, 3), 0, 0);
+        /*try {
+            System.out.println(multiplyDiagonalElementsRelativeEnteredElement(generateTwoDimensionalArray(5, 5), 9));
+        }
+        catch (NoElementInArray e) {
+            System.out.println(e.getMessage());
+        }   */
         //Задача10
-        //System.out.println(hasDatePassed(Holidays.BIRTHDAY));
+        //System.out.println(hasDatePassed2(Holidays2.YESTERDAY));
 
     }
 
@@ -94,16 +102,10 @@ public class Main {
     }
 
     public static int differenceBetweenMinAndMaxElementsInArray (int [] givenArray) {
-        //System.out.println(Arrays.toString(givenArray));
-        int minElement = minElementInArray(givenArray);
-        int maxElement = maxElementInArray(givenArray);
-        int difference = maxElement - minElement;
-        return difference;
+        return maxElementInArray(givenArray) - minElementInArray(givenArray);
     }
 
     public static boolean comparisonElementsTwoArrays(int[] givenArray1, int[] givenArray2) {
-        System.out.println(Arrays.toString(givenArray1));
-        System.out.println(Arrays.toString(givenArray2));
         if (givenArray1.length != givenArray2.length) {
             return false;
         }
@@ -119,7 +121,7 @@ public class Main {
 
     public static int searchMissedNumberFromZeroToNineInArray (int[] givenArray) {
         final int[] arrayWithNumbersFromZeroToNine = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        int missedNumber = 0;
+        int missedNumber = -1;
 
         for (int i = 0; i < arrayWithNumbersFromZeroToNine.length; i++) {
             int counter = 0;
@@ -193,7 +195,7 @@ public class Main {
         return array;
     }
 
-    public static int minElementInTwoDimensionalArray (int[][] givenArray) {
+    public static int findMinElement(int[][] givenArray) {
         int minElement = givenArray[0][0];
         for (int i = 0; i < givenArray.length; i++) {
             for (int j = 0; j < givenArray[i].length; j++) {
@@ -205,7 +207,7 @@ public class Main {
         return minElement;
     }
 
-    public static int maxElementInTwoDimensionalArray (int[][] givenArray) {
+    public static int findMaxElement(int[][] givenArray) {
         int maxElement = givenArray[0][0];
         for (int i = 0; i < givenArray.length; i++) {
             for (int j = 0; j < givenArray[i].length; j++) {
@@ -218,8 +220,8 @@ public class Main {
     }
 
     public static int[][] swapMinAndMaxElementsInTwoDimensionalArray (int[][] givenArray) {
-        int minElement = minElementInTwoDimensionalArray(givenArray);
-        int maxElement = maxElementInTwoDimensionalArray(givenArray);
+        int minElement = findMinElement(givenArray);
+        int maxElement = findMaxElement(givenArray);
         for (int i = 0; i < givenArray.length; i++) {
             for (int j = 0; j < givenArray[i].length; j++) {
                 if (givenArray[i][j] == minElement) {
@@ -233,14 +235,42 @@ public class Main {
         return givenArray;
     }
 
+    public static int[][] swapMinAndMaxElementsInTwoDimensionalArray2 (int[][] givenArray) {
+        int minElement = givenArray[0][0];
+        int maxElement = givenArray[0][0];
+        for (int i = 0; i < givenArray.length; i++) {
+            for (int j = 0; j < givenArray[i].length; j++) {
+                if (givenArray[i][j] < minElement) {
+                    minElement = givenArray[i][j];
+                }
+                else if (givenArray[i][j] > maxElement) {
+                    maxElement = givenArray[i][j];
+                }
+            }
+        }
+        for (int i = 0; i < givenArray.length; i++) {
+            for (int j = 0; j < givenArray[i].length; j++) {
+                if (givenArray[i][j] == minElement) {
+                    givenArray[i][j] = maxElement;
+                }
+                else if (givenArray[i][j] == maxElement) {
+                    givenArray[i][j] = minElement;
+                }
+            }
+        }
+        return givenArray;
+
+    }
+
     public static int[][] replaceOddOnEvenElementInTwoDimensionalArray (int[][] givenArray) {
+        printTwoDimensionalArray(givenArray);
         System.out.println();
         for (int i = 0; i < givenArray.length; i++) {
             for (int j = 0; j < givenArray[i].length; j++) {
-                if (givenArray[i][j] % 2 != 0) {
+                if (givenArray[i][j] % 2 != 0 && j != 0) {
                     givenArray[i][j] = givenArray[i][j-1];
                 }
-                else if (j == 0 && i == 0) {
+                else if (givenArray[i][j] % 2 != 0 && j == 0) {
                     givenArray[i][j] = 0;
                 }
             }
@@ -248,18 +278,59 @@ public class Main {
         return givenArray;
     }
 
-    public static int multiplyDiagonalElementsRelativeEnteredElement (int[][] givenArray, int indexOfLine, int indexOfElementInLine) {
+    public static int multiplyDiagonalElementsRelativeEnteredElement (int[][] givenArray, int number) throws NoElementInArray {
         int multiply = 0;
-        printTwoDimensionalArray(givenArray);
-        if (indexOfLine < givenArray.length - 1 && indexOfElementInLine < givenArray[indexOfLine].length - 1 && indexOfLine != 0 && indexOfElementInLine != 0) {
-            multiply = givenArray[indexOfLine-1][indexOfElementInLine-1] * givenArray[indexOfLine-1][indexOfElementInLine+1] * givenArray[indexOfLine+1][indexOfElementInLine-1] * givenArray[indexOfLine+1][indexOfElementInLine+1];
+        int indexOfLine = -1;
+        int indexOfElementInLine = -1;
+        for (int i = 0; i < givenArray.length; i++) {
+            for (int j = 0; j < givenArray[i].length; j++) {
+                if (givenArray[i][j] == number) {
+                    indexOfLine = i;
+                    indexOfElementInLine = j;
+                    break;
+                }
+            }
         }
-        else if (indexOfLine == 0 && indexOfElementInLine == 0) {
-            multiply = givenArray[indexOfLine+1][indexOfElementInLine+1];
+        System.out.println("indexOfLine " + indexOfLine);
+        System.out.println("indexOfElementInLine " + indexOfElementInLine);
+        printTwoDimensionalArray(givenArray);
+        if (indexOfLine == -1 && indexOfElementInLine == -1) {
+            throw new NoElementInArray("Данное число отсутствует в массиве");
+        }
+        else {
+            if (indexOfLine < givenArray.length - 1 && indexOfElementInLine < givenArray[indexOfLine].length - 1 && indexOfLine != 0 && indexOfElementInLine != 0) {
+                multiply = givenArray[indexOfLine-1][indexOfElementInLine-1] *
+                        givenArray[indexOfLine-1][indexOfElementInLine+1] *
+                        givenArray[indexOfLine+1][indexOfElementInLine-1] *
+                        givenArray[indexOfLine+1][indexOfElementInLine+1];
+            }
+            else if (indexOfLine == 0 && indexOfElementInLine == 0) {
+                multiply = givenArray[indexOfLine+1][indexOfElementInLine+1];
+            }
+            else if (indexOfLine == givenArray.length-1 && indexOfElementInLine == 0) {
+                multiply = givenArray[indexOfLine-1][indexOfElementInLine+1];
+            }
+            else if (indexOfLine == givenArray.length-1 && indexOfElementInLine == givenArray[indexOfLine].length-1) {
+                multiply = givenArray[indexOfLine-1][indexOfElementInLine-1];
+            }
+            else if (indexOfLine == 0 && indexOfElementInLine == givenArray[indexOfLine].length-1) {
+                multiply = givenArray[indexOfLine+1][indexOfElementInLine-1];
+            }
+            else if (indexOfLine == 0 && indexOfElementInLine < givenArray[indexOfLine].length-1) {
+                multiply = givenArray[indexOfLine+1][indexOfElementInLine-1] * givenArray[indexOfLine+1][indexOfElementInLine+1];
+            }
+            else if (indexOfLine < givenArray.length-1 && indexOfElementInLine == givenArray[indexOfLine].length-1) {
+                multiply = givenArray[indexOfLine+1][indexOfElementInLine-1] * givenArray[indexOfLine-1][indexOfElementInLine-1];
+            }
+            else if (indexOfLine == givenArray.length-1 && indexOfElementInLine < givenArray[indexOfLine].length-1) {
+                multiply = givenArray[indexOfLine-1][indexOfElementInLine-1] * givenArray[indexOfLine-1][indexOfElementInLine+1];
+            }
+            else if (indexOfLine < givenArray.length-1 && indexOfElementInLine == 0) {
+                multiply = givenArray[indexOfLine-1][indexOfElementInLine+1] * givenArray[indexOfLine+1][indexOfElementInLine+1];
+            }
+            return multiply;
         }
 
-        System.out.println(multiply);
-        return multiply;
 
     }
 
@@ -268,6 +339,22 @@ public class Main {
         long currentDateMillis = calendar.getTimeInMillis();
         long holidayDateMillis = holiday.getCalendar().getTimeInMillis();
         return currentDateMillis > holidayDateMillis;
+    }
+
+    public static boolean hasDatePassed2(Holidays2 holiday) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate holiday1 = holiday.getDate();
+        if     (currentDate.getYear() > holiday1.getYear() ||
+                currentDate.getYear() == holiday1.getYear() && currentDate.getMonthValue() > holiday1.getMonthValue() ||
+                currentDate.getYear() == holiday1.getYear() && currentDate.getMonthValue() == holiday1.getMonthValue() && currentDate.getDayOfMonth() > holiday1.getDayOfMonth()
+                )
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
 
