@@ -1,8 +1,4 @@
-import javafx.scene.effect.Blend;
-import sun.awt.event.IgnorePaintEvent;
-
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +9,8 @@ public class Main {
         //System.out.println(maxElementInTwoDimensionalArray(generateTwoDimensionalArray(3, 3)));
         //printTwoDimensionalArray(swapMinAndMaxElementsInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
         //printTwoDimensionalArray(replaceOddOnEvenElementInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
-        multiplyDiagonalElementsRelativeEnteredElement(generateTwoDimensionalArray(3, 3), 0, 0);
+        //multiplyDiagonalElementsRelativeEnteredElement(generateTwoDimensionalArray(3, 3), 0, 0);
+        System.out.println(hasDatePassed(Holidays.NEWYEAR2020));
 
     }
 
@@ -232,10 +229,10 @@ public class Main {
         System.out.println();
         for (int i = 0; i < givenArray.length; i++) {
             for (int j = 0; j < givenArray[i].length; j++) {
-                if (j % 2 != 0) {
+                if (givenArray[i][j] % 2 != 0) {
                     givenArray[i][j] = givenArray[i][j-1];
                 }
-                else if (j == 0) {
+                else if (j == 0 && i == 0) {
                     givenArray[i][j] = 0;
                 }
             }
@@ -256,6 +253,13 @@ public class Main {
         System.out.println(multiply);
         return multiply;
 
+    }
+
+    public static boolean hasDatePassed(Holidays holiday) {
+        Calendar calendar = new GregorianCalendar();
+        long currentDateMillis = calendar.getTimeInMillis();
+        long holidayDateMillis = holiday.getCalendar().getTimeInMillis();
+        return currentDateMillis > holidayDateMillis;
     }
 
 
