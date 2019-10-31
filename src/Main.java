@@ -2,15 +2,23 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        //Задача2
         //System.out.println(returnDayInMonth(Months.APRIL));
+        //Задача3
         //System.out.println(differenceBetweenMinAndMaxElementsInArray(makeArrayWithRandomElements(6)));
+        //Задача4
         //System.out.println(comparisonElementsTwoArrays(makeArrayWithRandomElements(2), makeArrayWithRandomElements(3)));
+        //Задача5
         //System.out.println(searchMissedNumberFromZeroToNineInArray(new int[]{1, 0, 4, 9, 6, 5, 3, 8, 7}));
-        //System.out.println(maxElementInTwoDimensionalArray(generateTwoDimensionalArray(3, 3)));
+        //Задача6
+        //Задача7
         //printTwoDimensionalArray(swapMinAndMaxElementsInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
+        //Задача8
         //printTwoDimensionalArray(replaceOddOnEvenElementInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
+        //Задача9
         //multiplyDiagonalElementsRelativeEnteredElement(generateTwoDimensionalArray(3, 3), 0, 0);
-        System.out.println(hasDatePassed(Holidays.NEWYEAR2020));
+        //Задача10
+        //System.out.println(hasDatePassed(Holidays.BIRTHDAY));
 
     }
 
