@@ -327,16 +327,6 @@ public class Main {
     public static boolean hasDatePassed2(Holidays2 date) {
         LocalDate currentDate = LocalDate.now();
         LocalDate holiday = date.getDate();
-        /*if     (currentDate.getYear() > holiday.getYear() ||
-                currentDate.getYear() == holiday.getYear() && currentDate.getMonthValue() > holiday.getMonthValue() ||
-                currentDate.getYear() == holiday.getYear() && currentDate.getMonthValue() == holiday.getMonthValue() && currentDate.getDayOfMonth() > holiday.getDayOfMonth()
-                )
-        {
-            return true;
-        }
-        else {
-            return false;
-        }*/
         return currentDate.isAfter(holiday);
 
     }
