@@ -1,32 +1,34 @@
+import com.sun.javafx.sg.prism.NGImageView;
+
 import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
+    public static final Random r = new Random();
     public static void main(String[] args) {
         //Задача2
-        //System.out.println(returnDayInMonth(Months.APRIL));
+        System.out.println(returnDayInMonth(Months.APRIL));
         //Задача3
-        //System.out.println(differenceBetweenMinAndMaxElementsInArray(makeArrayWithRandomElements(6)));
+        System.out.println(differenceBetweenMinAndMaxElementsInArray(makeArrayWithRandomElements(6)));
         //Задача4
-        //System.out.println(comparisonElementsTwoArrays(makeArrayWithRandomElements(2), makeArrayWithRandomElements(3)));
+        System.out.println(comparisonElementsTwoArrays(makeArrayWithRandomElements(2), makeArrayWithRandomElements(3)));
         //Задача5
-        //System.out.println(searchMissedNumberFromZeroToNineInArray(new int[]{1, 0, 4, 9, 6, 5, 3, 8, 7, 2}));
+        System.out.println(searchMissedNumberFromZeroToNineInArray(new int[]{1, 0, 4, 9, 6, 5, 3, 8, 7, 2}));
         //Задача6
-        //System.out.println(findMinElement(generateTwoDimensionalArray(5, 6)));
+        System.out.println(findMinElement(generateTwoDimensionalArray(5, 6)));
         //Задача7
-        //printTwoDimensionalArray(swapMinAndMaxElementsInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
-        //swapMinAndMaxElementsInTwoDimensionalArray2(generateTwoDimensionalArray(4, 4));
+        swapMinAndMaxElementsInTwoDimensionalArray2(generateTwoDimensionalArray(4, 4));
         //Задача8
-        //printTwoDimensionalArray(replaceOddOnEvenElementInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
+        printTwoDimensionalArray(replaceOddOnEvenElementInTwoDimensionalArray(generateTwoDimensionalArray(4, 4)));
         //Задача9
-        /*try {
-            System.out.println(multiplyDiagonalElementsRelativeEnteredElement(generateTwoDimensionalArray(5, 5), 9));
+        try {
+            System.out.println(multiplyDiagonalElementsRelativeEnteredElement(generateTwoDimensionalArray(5, 5), -1));
         }
         catch (NoElementInArray e) {
             System.out.println(e.getMessage());
-        }   */
+        }
         //Задача10
-        //System.out.println(hasDatePassed2(Holidays2.YESTERDAY));
+        System.out.println(hasDatePassed2(Holidays2.TOMORROW));
 
     }
 
@@ -122,7 +124,6 @@ public class Main {
     public static int searchMissedNumberFromZeroToNineInArray (int[] givenArray) {
         final int[] arrayWithNumbersFromZeroToNine = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         int missedNumber = -1;
-
         for (int i = 0; i < arrayWithNumbersFromZeroToNine.length; i++) {
             int counter = 0;
             for (int j = 0; j < givenArray.length; j++) {
@@ -143,12 +144,9 @@ public class Main {
 
     public static int[][] generateTwoDimensionalArray(int length, int width) {
         int[][] array = new int[length][width];
-        //int number = 1;
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-                array[i][j] = (int) (Math.random() * 10 - 5);
-                /*array[i][j] = number;
-                number ++;*/
+                array[i][j] = r.nextInt(10);
             }
         }
         return array;
@@ -158,17 +156,9 @@ public class Main {
         for (int i = 0; i < givenArray.length; i++) {
             System.out.println(Arrays.toString(givenArray[i]));
         }
-        /*System.out.println();
-        for (int i = 0; i < givenArray.length; i++) {
-            for (int j = 0; j < givenArray[i].length; j++) {
-                System.out.print(givenArray[i][j] + "\t");
-            }
-            System.out.println();
-        }*/
     }
 
     public static void swapOddAndEvenLinesIn2DArray(int[][] givenArray) {
-        printTwoDimensionalArray(givenArray);
         for (int i = 0; i < givenArray.length; i++) {
             int[] tmp = new int[givenArray.length];
             if (i % 2 != 0) {
@@ -177,12 +167,9 @@ public class Main {
                 givenArray[i] = tmp;
             }
         }
-        System.out.println();
-        printTwoDimensionalArray(givenArray);
     }
 
     public static int[] sumOfLine(int[][] givenArray) {
-        printTwoDimensionalArray(givenArray);
         System.out.println();
         int[] array = new int[givenArray.length];
         for (int i = 0; i < givenArray.length; i++) {
@@ -263,8 +250,6 @@ public class Main {
     }
 
     public static int[][] replaceOddOnEvenElementInTwoDimensionalArray (int[][] givenArray) {
-        printTwoDimensionalArray(givenArray);
-        System.out.println();
         for (int i = 0; i < givenArray.length; i++) {
             for (int j = 0; j < givenArray[i].length; j++) {
                 if (givenArray[i][j] % 2 != 0 && j != 0) {
@@ -291,14 +276,12 @@ public class Main {
                 }
             }
         }
-        System.out.println("indexOfLine " + indexOfLine);
-        System.out.println("indexOfElementInLine " + indexOfElementInLine);
-        printTwoDimensionalArray(givenArray);
         if (indexOfLine == -1 && indexOfElementInLine == -1) {
             throw new NoElementInArray("Данное число отсутствует в массиве");
         }
         else {
-            if (indexOfLine < givenArray.length - 1 && indexOfElementInLine < givenArray[indexOfLine].length - 1 && indexOfLine != 0 && indexOfElementInLine != 0) {
+            if      (indexOfLine < givenArray.length - 1 && indexOfElementInLine < givenArray[indexOfLine].length - 1 &&
+                     indexOfLine != 0 && indexOfElementInLine != 0) {
                 multiply = givenArray[indexOfLine-1][indexOfElementInLine-1] *
                         givenArray[indexOfLine-1][indexOfElementInLine+1] *
                         givenArray[indexOfLine+1][indexOfElementInLine-1] *
@@ -341,19 +324,20 @@ public class Main {
         return currentDateMillis > holidayDateMillis;
     }
 
-    public static boolean hasDatePassed2(Holidays2 holiday) {
+    public static boolean hasDatePassed2(Holidays2 date) {
         LocalDate currentDate = LocalDate.now();
-        LocalDate holiday1 = holiday.getDate();
-        if     (currentDate.getYear() > holiday1.getYear() ||
-                currentDate.getYear() == holiday1.getYear() && currentDate.getMonthValue() > holiday1.getMonthValue() ||
-                currentDate.getYear() == holiday1.getYear() && currentDate.getMonthValue() == holiday1.getMonthValue() && currentDate.getDayOfMonth() > holiday1.getDayOfMonth()
+        LocalDate holiday = date.getDate();
+        /*if     (currentDate.getYear() > holiday.getYear() ||
+                currentDate.getYear() == holiday.getYear() && currentDate.getMonthValue() > holiday.getMonthValue() ||
+                currentDate.getYear() == holiday.getYear() && currentDate.getMonthValue() == holiday.getMonthValue() && currentDate.getDayOfMonth() > holiday.getDayOfMonth()
                 )
         {
             return true;
         }
         else {
             return false;
-        }
+        }*/
+        return currentDate.isAfter(holiday);
 
     }
 
